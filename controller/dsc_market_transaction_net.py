@@ -11,23 +11,23 @@ from openpyxl import load_workbook
 def data_xlsm_market_transaction():
     read_not = False
     today = date.today()
-    dir_path = r'\powerbi\UPLOAD_FILE'
-    backup_path = r'\powerbi\Backup'
-    failed_path = r'\powerbi\Failed'
+    dir_path = '/powerbi/UPLOAD_FILE'
+    backup_path = '/powerbi/Backup'
+    failed_path = '/powerbi/Failed'
     dir_path_file = ''
     for path in os.listdir(dir_path):
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("transaction_day", path)
             if read_not:
-                dir_path_file = f'\\powerbi\\UPLOAD_FILE\\{path}'
+                dir_path_file = f'/powerbi/UPLOAD_FILE/{path}'
                 break
     ###
     if read_not:
         pxl_doc = openpyxl.load_workbook(dir_path_file)
-        pxl_doc.save(f'{dir_path}\\transaction_day_{today}.xlsx')
+        pxl_doc.save(f'{dir_path}/transaction_day_{today}.xlsx')
         os.remove(dir_path_file)
         final_data_list = []
-        wb = load_workbook(f'{dir_path}\\transaction_day_{today}.xlsx')
+        wb = load_workbook(f'{dir_path}/transaction_day_{today}.xlsx')
         sheet = wb.active
         date_str = sheet.cell(row=10, column=2).value.split('/')[0]
         if date_str == today.strftime("%Y-%m-%d"):
@@ -102,9 +102,9 @@ def data_xlsm_market_transaction():
             print(f'[transaction_day] insert done data size: {len(final_data_list)}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             telegram.send(mess=f"[transaction_day] Insert done / Data size: {len(final_data_list)}")
             database.main.commit()
-            shutil.move(f'{dir_path}\\transaction_day_{today}.xlsx', backup_path)
+            shutil.move(f'{dir_path}/transaction_day_{today}.xlsx', backup_path)
         else:
-            shutil.move(f'{dir_path}\\transaction_day_{today}.xlsx', failed_path)
+            shutil.move(f'{dir_path}/transaction_day_{today}.xlsx', failed_path)
             print(f'[transaction_day] Không phải data ngày: {today}. Đây là data ngày: {date_str}')
             telegram.send(mess=f"[transaction_day] Sai data. Đây là data ngày: {date_str}")
         read_not = False

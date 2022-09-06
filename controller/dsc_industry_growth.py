@@ -10,14 +10,14 @@ from datetime import datetime, date
 def data_xlsm_growth():
     read_not = False
     today = date.today()
-    dir_path = r'\powerbi\UPLOAD_FILE'
-    backup_path = r'\powerbi\Backup'
-    failed_path = r'\powerbi\Failed'
+    dir_path = '/powerbi/UPLOAD_FILE'
+    backup_path = '/powerbi/Backup'
+    failed_path = '/powerbi/Failed'
     for path in os.listdir(dir_path):
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("industry_growth", path)
             if read_not:
-                dir_path = f'\\powerbi\\UPLOAD_FILE\\{path}'
+                dir_path = f'/powerbi/UPLOAD_FILE/{path}'
                 break
     #####
     if read_not:
