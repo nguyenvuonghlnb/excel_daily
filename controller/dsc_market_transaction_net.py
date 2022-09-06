@@ -29,7 +29,7 @@ def data_xlsm_market_transaction():
         final_data_list = []
         wb = load_workbook(f'{dir_path}/transaction_day_{today}.xlsx')
         sheet = wb.active
-        date_str = sheet.cell(row=10, column=2).value.split('/')[0]
+        date_str = sheet.cell(row=10, column=2).value.split('/')[1]
         if date_str == today.strftime("%Y-%m-%d"):
             for i in range(16, sheet.max_row + 1):
                 data_collection_date = sheet.cell(row=10, column=2).value
