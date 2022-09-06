@@ -17,7 +17,7 @@ def data_xlsx_backtest():
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("backtest", path)
             if read_not:
-                dir_path = f'\\powerbi\\UPLOAD_FILE\\{path}'
+                dir_path = f'\powerbi\UPLOAD_FILE\{path}'
                 break
     #####
     if read_not:
