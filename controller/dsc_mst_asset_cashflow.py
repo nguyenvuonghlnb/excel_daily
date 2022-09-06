@@ -12,9 +12,9 @@ from openpyxl import load_workbook
 def data_xlsm():
     read_not = False
     today = date.today()
-    dir_path = '/powerbi/UPLOAD_FILE/'
-    backup_path = '/powerbi/Backup/'
-    failed_path = '/powerbi/Failed/'
+    dir_path = '/powerbi/UPLOAD_FILE'
+    backup_path = '/powerbi/Backup'
+    failed_path = '/powerbi/Failed'
     for path in os.listdir(dir_path):
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("world_assets", path)
