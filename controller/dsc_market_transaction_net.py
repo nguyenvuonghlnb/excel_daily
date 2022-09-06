@@ -19,7 +19,7 @@ def data_xlsm_market_transaction():
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("transaction_day", path)
             if read_not:
-                dir_path_file = f'\powerbi\UPLOAD_FILE\{path}'
+                dir_path_file = f'\\powerbi\\UPLOAD_FILE\\{path}'
                 break
     ###
     if read_not:

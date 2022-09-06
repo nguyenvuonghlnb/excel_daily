@@ -21,7 +21,7 @@ def data_xlsm_stock_transaction():
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("transaction_stocks", path)
             if read_not:
-                dir_path_file = f'\powerbi\UPLOAD_FILE\{path}'
+                dir_path_file = f'\\powerbi\\UPLOAD_FILE\\{path}'
                 break
 
     if read_not:

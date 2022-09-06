@@ -17,7 +17,7 @@ def data_xlsm_growth():
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("industry_growth", path)
             if read_not:
-                dir_path = f'\powerbi\UPLOAD_FILE\{path}'
+                dir_path = f'\\powerbi\\UPLOAD_FILE\\{path}'
                 break
     #####
     if read_not:
