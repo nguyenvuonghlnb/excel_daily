@@ -13,15 +13,15 @@ def data_xlsm_stock_transaction():
     # number = random.randint(1, 5)
     read_not = False
     today = date.today()
-    dir_path = r'\\192.168.50.12\ebroker\data_daily\UPLOAD_FILE'
-    backup_path = r'\\192.168.50.12\ebroker\data_daily\Backup'
-    failed_path = r'\\192.168.50.12\ebroker\data_daily\Failed'
+    dir_path = r'\powerbi\UPLOAD_FILE'
+    backup_path = r'\powerbi\Backup'
+    failed_path = r'\powerbi\Failed'
     dir_path_file = ''
     for path in os.listdir(dir_path):
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("transaction_stocks", path)
             if read_not:
-                dir_path_file = f'\\\\192.168.50.12\\ebroker\\data_daily\\UPLOAD_FILE\\{path}'
+                dir_path_file = f'\\powerbi\\UPLOAD_FILE\\{path}'
                 break
 
     if read_not:

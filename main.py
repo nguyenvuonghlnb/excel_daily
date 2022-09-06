@@ -33,7 +33,7 @@ def import_excel_daily():
 # if __name__ == '__main__':
 #     import_excel_daily()
 
-scheduler.add_job(import_excel_daily, 'cron', day_of_week='mon-sun', hour='13', minute='06', start_date='2022-09-06 08:00:00', end_date='2023-09-06 08:00:00', timezone='Asia/Ho_Chi_Minh')
+scheduler.add_job(import_excel_daily, 'cron', day_of_week='mon-sun', hour='13', minute='15', start_date='2022-09-06 08:00:00', end_date='2023-09-06 08:00:00', timezone='Asia/Ho_Chi_Minh')
 # Start the scheduler
 scheduler.start()
 

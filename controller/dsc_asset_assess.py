@@ -10,14 +10,14 @@ from datetime import date
 def data_xlsx_backtest():
     read_not = False
     today = date.today()
-    dir_path = r'\\192.168.50.12\ebroker\data_daily\UPLOAD_FILE'
-    backup_path = r'\\192.168.50.12\ebroker\data_daily\Backup'
-    failed_path = r'\\192.168.50.12\ebroker\data_daily\Failed'
+    dir_path = r'\powerbi\UPLOAD_FILE'
+    backup_path = r'\powerbi\Backup'
+    failed_path = r'\powerbi\Failed'
     for path in os.listdir(dir_path):
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("backtest", path)
             if read_not:
-                dir_path = f'\\\\192.168.50.12\\ebroker\\data_daily\\UPLOAD_FILE\\{path}'
+                dir_path = f'\\powerbi\\UPLOAD_FILE\\{path}'
                 break
     #####
     if read_not:
