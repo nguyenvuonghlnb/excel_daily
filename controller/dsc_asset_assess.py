@@ -41,8 +41,8 @@ def data_xlsx_backtest():
             assess['profit_average'] = profit_average[i]
             final_data_list.append(assess)
         cur = database.main.cursor()
-        cur.executemany('''INSERT INTO datafeed.dsc_asset_assess_555(time, growth, momentum, profit_max, profit_min,
-        profit_average) VALUES (%s, %s, %s, %s, %s, %s) ON CONFLICT ON CONSTRAINT dsc_mst_asset_assess_pkey_555 
+        cur.executemany('''INSERT INTO datafeed.dsc_asset_assess(time, growth, momentum, profit_max, profit_min,
+        profit_average) VALUES (%s, %s, %s, %s, %s, %s) ON CONFLICT ON CONSTRAINT dsc_mst_asset_assess_pkey 
         DO UPDATE SET (time, growth, momentum, profit_max, profit_min,profit_average) = 
         (EXCLUDED.time, EXCLUDED.growth, EXCLUDED.momentum, EXCLUDED.profit_max, EXCLUDED.profit_min, EXCLUDED.profit_average)''',
                         [[item.get("time"),
@@ -56,5 +56,5 @@ def data_xlsx_backtest():
         telegram.send(mess=f"[backtest] Insert done / Data size: {len(final_data_list)} - Day: {today}")
         shutil.move(dir_path, backup_path)
     else:
-        telegram.send(mess=f"[backtest] Không tìm thấy file ngày: {today}")
-        print("[backtest] Không thấy file !!!")
+        telegram.send(mess=f"[backtest] Caution: File not found / Date: {today}")
+        print(f"[backtest] Caution: File not found / Date: {today}")

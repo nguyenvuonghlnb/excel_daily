@@ -82,9 +82,9 @@ def data_xlsm_market_transaction():
                 })
 
             cur = database.main.cursor()
-            cur.executemany('''INSERT INTO datafeed.dsc_market_transaction_net_555 (category, date, volume_buy, value_buy, 
+            cur.executemany('''INSERT INTO datafeed.dsc_market_transaction_net (category, date, volume_buy, value_buy, 
             volume_sell, value_sell, volume_net, value_net, data_collection_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 
-            %s) ON CONFLICT ON CONSTRAINT dsc_mst_asset_transaction_statistics_general_pkey_555 DO UPDATE SET (category, 
+            %s) ON CONFLICT ON CONSTRAINT dsc_mst_asset_transaction_statistics_general_pkey DO UPDATE SET (category, 
             date, volume_buy, value_buy, volume_sell, value_sell, volume_net, value_net, data_collection_date) = (
             EXCLUDED.category, EXCLUDED.date, EXCLUDED.volume_buy, EXCLUDED.value_buy, EXCLUDED.volume_sell, 
             EXCLUDED.value_sell, EXCLUDED.volume_net, EXCLUDED.value_net, EXCLUDED.data_collection_date)''',
@@ -105,11 +105,11 @@ def data_xlsm_market_transaction():
             shutil.move(f'{dir_path}/transaction_day_{today}.xlsx', backup_path)
         else:
             shutil.move(f'{dir_path}/transaction_day_{today}.xlsx', failed_path)
-            print(f'[transaction_day/daily] Không phải data ngày: {today}. Đây là data ngày: {date_str}')
-            telegram.send(mess=f"[transaction_day/daily] Sai data. Đây là data ngày: {date_str}")
+            print(f'[transaction_day/daily] Error: Not date data: {today}. Data date: {date_str}')
+            telegram.send(mess=f"[transaction_day/daily] Error: Wrong data. Data date: {date_str}")
         read_not = False
     else:
-        print("[transaction_day/daily] Không thấy file !!!")
-        telegram.send(mess=f"[transaction_day/daily] Không tìm thấy file ngày: {today}")
+        print(f"[transaction_day/daily] Caution: File not found / Date: {today}")
+        telegram.send(mess=f"[transaction_day/daily] Caution: File not found / Date: {today}")
 
 

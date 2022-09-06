@@ -51,9 +51,9 @@ def data_xlsm_growth():
                 final_data_list.append(obj)
         # print(final_data_list)
         cur = database.main.cursor()
-        cur.executemany('''INSERT INTO datafeed.dsc_industry_growth_555( icbname, icblevel, netsale, net_profit, equity, 
+        cur.executemany('''INSERT INTO datafeed.dsc_industry_growth( icbname, icblevel, netsale, net_profit, equity, 
         lengthreport, yearreport) VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT ON CONSTRAINT 
-        dsc_industry_growth_pk_555 DO UPDATE SET (icbname, icblevel, netsale, net_profit, equity, lengthreport, 
+        dsc_industry_growth_pk DO UPDATE SET (icbname, icblevel, netsale, net_profit, equity, lengthreport, 
         yearreport) = (EXCLUDED.icbname, EXCLUDED.icblevel, EXCLUDED.netsale, EXCLUDED.net_profit, EXCLUDED.equity, 
         EXCLUDED.lengthreport, EXCLUDED.yearreport)''',
                         [[item.get("icbname"),
@@ -68,5 +68,5 @@ def data_xlsm_growth():
         telegram.send(mess=f"[industry_growth] Insert done / Data size: {len(final_data_list)} - Day: {data_date}")
         shutil.move(dir_path, backup_path)
     else:
-        print("[industry_growth] Không thấy file !!!")
-        telegram.send(mess=f"[industry_growth] Không tìm thấy file ngày: {today}")
+        print(f"[industry_growth] Caution: File not found / Date: {today}")
+        telegram.send(mess=f"[industry_growth] Caution: File not found / Date: {today}")

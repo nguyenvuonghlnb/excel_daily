@@ -92,10 +92,10 @@ def data_xlsm_stock_transaction():
 
             # print(f"final_data_list length {final_data_list}")
             cur = database.main.cursor()
-            cur.executemany('''INSERT INTO datafeed.dsc_stock_transaction_net_555(category, date, stock_code,
+            cur.executemany('''INSERT INTO datafeed.dsc_stock_transaction_net(category, date, stock_code,
             volume_buy, value_buy, volume_sell, value_sell, volume_net, value_net, data_collection_date) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)ON CONFLICT ON CONSTRAINT 
-            dsc_mst_asset_transaction_statistics_pkey_555 DO UPDATE SET (category, date, stock_code,volume_buy, 
+            dsc_mst_asset_transaction_statistics_pkey DO UPDATE SET (category, date, stock_code,volume_buy, 
             value_buy, volume_sell, value_sell, volume_net, value_net, data_collection_date) = (
             EXCLUDED.category, EXCLUDED.date, EXCLUDED.stock_code, EXCLUDED.volume_buy, EXCLUDED.value_buy, 
             EXCLUDED.volume_sell, EXCLUDED.value_sell, EXCLUDED.volume_net, EXCLUDED.value_net, 
@@ -118,9 +118,9 @@ def data_xlsm_stock_transaction():
             shutil.move(f'{dir_path}/transaction_stocks_{today}.xlsx', backup_path)
         else:
             shutil.move(f'{dir_path}/transaction_stocks_{today}.xlsx', failed_path)
-            print(f'[transaction_stocks/daily] Không phải data ngày: {today}. Đây là data ngày: {date_str}')
-            telegram.send(mess=f"[transaction_stocks/daily] Sai data. Đây là data ngày: {date_str}")
+            print(f'[transaction_stocks/daily] Error: Not date data: {today}. Data date: {date_str}')
+            telegram.send(mess=f"[transaction_stocks/daily] Error: Wrong data. Data date: {date_str}")
         read_not = False
     else:
-        telegram.send(mess=f"[transaction_stocks/daily] Không tìm thấy file ngày: {today}")
-        print("[transaction_stocks/daily] Không tìm thấy file !!!")
+        telegram.send(mess=f"[transaction_stocks/daily] Caution: File not found / Date: {today}")
+        print(f"[transaction_stocks/daily] Caution: File not found / Date: {today}")

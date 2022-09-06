@@ -66,8 +66,8 @@ def data_xlsm():
 
             # for get in list_data_success:
             cur = database.main.cursor()
-            cur.executemany('''INSERT INTO datafeed.dsc_mst_asset_cashflow_555 (asset_code, datetime, cashflow, ranks)
-            VALUES (%s, %s, %s, %s)ON CONFLICT ON CONSTRAINT dsc_mst_asset_cashflow_pkey_555 
+            cur.executemany('''INSERT INTO datafeed.dsc_mst_asset_cashflow (asset_code, datetime, cashflow, ranks)
+            VALUES (%s, %s, %s, %s)ON CONFLICT ON CONSTRAINT dsc_mst_asset_cashflow_pkey 
             DO UPDATE SET (asset_code, datetime, cashflow, ranks) = 
             (EXCLUDED.asset_code, EXCLUDED.datetime, EXCLUDED.cashflow, EXCLUDED.ranks)''',
                             [[item.get("asset_code"),
@@ -80,9 +80,9 @@ def data_xlsm():
             shutil.move(dir_path, backup_path)
         else:
             shutil.move(dir_path, failed_path)
-            print(f'[transaction_stocks/daily] Không phải data ngày: {today}. Đây là data ngày: {data_date}')
-            telegram.send(mess=f"[transaction_stocks/daily] Sai data. Đây là data ngày: {data_date}")
+            print(f'[transaction_stocks/daily] Error: Not date data: {today}. Data date: {data_date}')
+            telegram.send(mess=f"[transaction_stocks/daily] Error: Wrong data. Data date: {data_date}")
         read_not = False
     else:
-        print("[world_assets/daily] Không thấy file !!!")
-        telegram.send(mess=f"[world_assets/daily] Không tìm thấy file ngày: {today}")
+        print(f"[world_assets/daily] Caution: File not found / Date: {today}")
+        telegram.send(mess=f"[world_assets/daily] Caution: File not found / Date: {today}")
