@@ -113,8 +113,8 @@ def data_xlsm_stock_transaction():
                                 item.get("data_collection_date")
                             ] for item in final_data_list])
             database.main.commit()
-            print(f'[transaction_stocks/daily] Insert done {len(final_data_list)}')
-            telegram.send(mess=f"[transaction_stocks/daily] Insert done / Data size: {len(final_data_list)}")
+            print(f'[transaction_stocks/daily] Insert done / Data size: {len(final_data_list)} - Day: {date_str}')
+            telegram.send(mess=f"[transaction_stocks/daily] Insert done / Data size: {len(final_data_list)} - Day: {date_str}")
             shutil.move(f'{dir_path}/transaction_stocks_{today}.xlsx', backup_path)
         else:
             shutil.move(f'{dir_path}/transaction_stocks_{today}.xlsx', failed_path)

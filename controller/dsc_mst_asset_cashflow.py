@@ -75,9 +75,8 @@ def data_xlsm():
                               item.get("cashflow"),
                               item.get("ranks")] for item in list_data_success])
             database.main.commit()
-            print(f'[world_assets/daily] insert done data size: {len(list_data_success)}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-            print(f'[world_assets/daily] Data ngày: {data_date} - 200')
-            telegram.send(mess=f"[world_assets/daily] Insert done / Data size: {len(list_data_success)}")
+            print(f'[world_assets/daily] insert done data size: {len(list_data_success)} - Day: {data_date}', )
+            telegram.send(mess=f"[world_assets/daily] Insert done / Data size: {len(list_data_success)} - Day: {data_date} ")
             shutil.move(dir_path, backup_path)
         else:
             shutil.move(dir_path, failed_path)

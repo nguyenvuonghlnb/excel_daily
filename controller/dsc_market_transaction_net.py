@@ -99,8 +99,8 @@ def data_xlsm_market_transaction():
                                 item.get("value_net"),
                                 item.get("data_collection_date")
                             ] for item in final_data_list])
-            print(f'[transaction_day/daily] insert done data size: {len(final_data_list)}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-            telegram.send(mess=f"[transaction_day/daily] Insert done / Data size: {len(final_data_list)}")
+            print(f'[transaction_day/daily] Insert done / Data size: {len(final_data_list)} - Day: {date_str}')
+            telegram.send(mess=f"[transaction_day/daily] Insert done / Data size: {len(final_data_list)} - Day: {date_str}")
             database.main.commit()
             shutil.move(f'{dir_path}/transaction_day_{today}.xlsx', backup_path)
         else:

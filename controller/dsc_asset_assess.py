@@ -52,8 +52,8 @@ def data_xlsx_backtest():
                           item.get("profit_min"),
                           item.get("profit_average")] for item in final_data_list])
         database.main.commit()
-        print(f'[backtest] insert done {len(final_data_list)}')
-        telegram.send(mess=f"[backtest] Insert done / Data size: {len(final_data_list)}")
+        print(f'[backtest] Insert done / Data size: {len(final_data_list)} - Day: {today}')
+        telegram.send(mess=f"[backtest] Insert done / Data size: {len(final_data_list)} - Day: {today}")
         shutil.move(dir_path, backup_path)
     else:
         telegram.send(mess=f"[backtest] Không tìm thấy file ngày: {today}")

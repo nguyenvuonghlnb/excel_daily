@@ -64,9 +64,8 @@ def data_xlsm_growth():
                           item.get("lengthreport"),
                           item.get("yearreport")] for item in final_data_list])
         database.main.commit()
-        print(f'[industry_growth] insert done data size: {len(final_data_list)}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        print(f'[industry_growth] Data ngày: {data_date} - 200')
-        telegram.send(mess=f"[industry_growth] Insert done / Data size: {len(final_data_list)}")
+        print(f'[industry_growth] Insert done / Data size: {len(final_data_list)} - Day: {data_date}')
+        telegram.send(mess=f"[industry_growth] Insert done / Data size: {len(final_data_list)} - Day: {data_date}")
         shutil.move(dir_path, backup_path)
     else:
         print("[industry_growth] Không thấy file !!!")
