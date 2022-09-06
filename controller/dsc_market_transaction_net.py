@@ -99,17 +99,17 @@ def data_xlsm_market_transaction():
                                 item.get("value_net"),
                                 item.get("data_collection_date")
                             ] for item in final_data_list])
-            print(f'[transaction_day] insert done data size: {len(final_data_list)}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-            telegram.send(mess=f"[transaction_day] Insert done / Data size: {len(final_data_list)}")
+            print(f'[transaction_day/daily] insert done data size: {len(final_data_list)}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            telegram.send(mess=f"[transaction_day/daily] Insert done / Data size: {len(final_data_list)}")
             database.main.commit()
             shutil.move(f'{dir_path}/transaction_day_{today}.xlsx', backup_path)
         else:
             shutil.move(f'{dir_path}/transaction_day_{today}.xlsx', failed_path)
-            print(f'[transaction_day] Không phải data ngày: {today}. Đây là data ngày: {date_str}')
-            telegram.send(mess=f"[transaction_day] Sai data. Đây là data ngày: {date_str}")
+            print(f'[transaction_day/daily] Không phải data ngày: {today}. Đây là data ngày: {date_str}')
+            telegram.send(mess=f"[transaction_day/daily] Sai data. Đây là data ngày: {date_str}")
         read_not = False
     else:
-        print("[transaction_day] Không thấy file !!!")
-        telegram.send(mess=f"[transaction_day] Không tìm thấy file ngày: {today}")
+        print("[transaction_day/daily] Không thấy file !!!")
+        telegram.send(mess=f"[transaction_day/daily] Không tìm thấy file ngày: {today}")
 
 

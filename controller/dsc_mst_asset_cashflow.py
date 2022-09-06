@@ -12,9 +12,9 @@ from openpyxl import load_workbook
 def data_xlsm():
     read_not = False
     today = date.today()
-    dir_path = '/powerbi/UPLOAD_FILE'
-    backup_path = '/powerbi/Backup'
-    failed_path = '/powerbi/Failed'
+    dir_path = '/powerbi/UPLOAD_FILE/'
+    backup_path = '/powerbi/Backup/'
+    failed_path = '/powerbi/Failed/'
     for path in os.listdir(dir_path):
         if os.path.isfile(os.path.join(dir_path, path)):
             read_not = re.search("world_assets", path)
@@ -75,15 +75,15 @@ def data_xlsm():
                               item.get("cashflow"),
                               item.get("ranks")] for item in list_data_success])
             database.main.commit()
-            print(f'[world_assets] insert done data size: {len(list_data_success)}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-            print(f'[world_assets] Data ngày: {data_date} - 200')
-            telegram.send(mess=f"[world_assets] Insert done / Data size: {len(list_data_success)}")
+            print(f'[world_assets/daily] insert done data size: {len(list_data_success)}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            print(f'[world_assets/daily] Data ngày: {data_date} - 200')
+            telegram.send(mess=f"[world_assets/daily] Insert done / Data size: {len(list_data_success)}")
             shutil.move(dir_path, backup_path)
         else:
             shutil.move(dir_path, failed_path)
-            print(f'[transaction_stocks] Không phải data ngày: {today}. Đây là data ngày: {data_date}')
-            telegram.send(mess=f"[transaction_stocks] Sai data. Đây là data ngày: {data_date}")
+            print(f'[transaction_stocks/daily] Không phải data ngày: {today}. Đây là data ngày: {data_date}')
+            telegram.send(mess=f"[transaction_stocks/daily] Sai data. Đây là data ngày: {data_date}")
         read_not = False
     else:
-        print("[world_assets] Không thấy file !!!")
-        telegram.send(mess=f"[world_assets] Không tìm thấy file ngày: {today}")
+        print("[world_assets/daily] Không thấy file !!!")
+        telegram.send(mess=f"[world_assets/daily] Không tìm thấy file ngày: {today}")
