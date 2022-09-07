@@ -92,10 +92,10 @@ def data_xlsm_stock_transaction():
 
             # print(f"final_data_list length {final_data_list}")
             cur = database.main.cursor()
-            cur.executemany('''INSERT INTO datafeed.dsc_stock_transaction_net(category, date, stock_code,
+            cur.executemany('''INSERT INTO datafeed.dsc_stock_transaction_net_555 (category, date, stock_code,
             volume_buy, value_buy, volume_sell, value_sell, volume_net, value_net, data_collection_date) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)ON CONFLICT ON CONSTRAINT 
-            dsc_mst_asset_transaction_statistics_pkey DO UPDATE SET (category, date, stock_code,volume_buy, 
+            dsc_mst_asset_transaction_statistics_pkey_555 DO UPDATE SET (category, date, stock_code,volume_buy, 
             value_buy, volume_sell, value_sell, volume_net, value_net, data_collection_date) = (
             EXCLUDED.category, EXCLUDED.date, EXCLUDED.stock_code, EXCLUDED.volume_buy, EXCLUDED.value_buy, 
             EXCLUDED.volume_sell, EXCLUDED.value_sell, EXCLUDED.volume_net, EXCLUDED.value_net, 

@@ -66,8 +66,8 @@ def data_xlsm():
 
             # for get in list_data_success:
             cur = database.main.cursor()
-            cur.executemany('''INSERT INTO datafeed.dsc_mst_asset_cashflow (asset_code, datetime, cashflow, ranks)
-            VALUES (%s, %s, %s, %s)ON CONFLICT ON CONSTRAINT dsc_mst_asset_cashflow_pkey 
+            cur.executemany('''INSERT INTO datafeed.dsc_mst_asset_cashflow_555 (asset_code, datetime, cashflow, ranks)
+            VALUES (%s, %s, %s, %s)ON CONFLICT ON CONSTRAINT dsc_mst_asset_cashflow_pkey_555 
             DO UPDATE SET (asset_code, datetime, cashflow, ranks) = 
             (EXCLUDED.asset_code, EXCLUDED.datetime, EXCLUDED.cashflow, EXCLUDED.ranks)''',
                             [[item.get("asset_code"),
