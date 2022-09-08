@@ -31,24 +31,24 @@ def data_xlsm_growth():
 
         for i in range(12, sheet.max_row + 1):
             icb_level = sheet.cell(row=i, column=2).value
-            if icb_level == 2:
-                # rowData = []
-                icb_name = sheet.cell(row=i, column=1).value
-                # doanh số thuần
-                net_sale = sheet.cell(row=i, column=4).value
-                # tăng trưởng lãi thuần
-                net_profit = sheet.cell(row=i, column=5).value
-                # vốn chủ sở hữu
-                equity = sheet.cell(row=i, column=6).value
-                obj = {}
-                obj['icbname'] = icb_name
-                obj['icblevel'] = icb_level
-                obj['netsale'] = net_sale
-                obj['net_profit'] = net_profit
-                obj['equity'] = equity
-                obj['lengthreport'] = last_quarter
-                obj['yearreport'] = current_year
-                final_data_list.append(obj)
+            icb_name = sheet.cell(row=i, column=1).value
+            if icb_name is None:
+                break
+            # doanh số thuần
+            net_sale = sheet.cell(row=i, column=4).value
+            # tăng trưởng lãi thuần
+            net_profit = sheet.cell(row=i, column=5).value
+            # vốn chủ sở hữu
+            equity = sheet.cell(row=i, column=6).value
+            obj = {}
+            obj['icbname'] = icb_name
+            obj['icblevel'] = icb_level
+            obj['netsale'] = net_sale
+            obj['net_profit'] = net_profit
+            obj['equity'] = equity
+            obj['lengthreport'] = last_quarter
+            obj['yearreport'] = current_year
+            final_data_list.append(obj)
         # print(final_data_list)
         cur = database.main.cursor()
         cur.executemany('''INSERT INTO datafeed.dsc_industry_growth( icbname, icblevel, netsale, net_profit, equity, 
