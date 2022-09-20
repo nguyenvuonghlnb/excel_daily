@@ -40,6 +40,11 @@ def data_xlsm():
                 list_data.append(data)
             list_data_success = []
             sub_day = 0
+            qk2 = datetime(2022, 9, 2, 00, 00, 00)
+            td = datetime(2022, 1, 3, 00, 00, 00)
+            ta5 = datetime(2022, 2, 4, 00, 00, 00)
+            gthv = datetime(2022, 4, 11, 00, 00, 00)
+            qtld2 = datetime(2022, 5, 3, 00, 00, 00)
             for x in range(0, 200 + 1):
                 arr = []
                 for data in list_data:
@@ -47,8 +52,14 @@ def data_xlsm():
                         obj = {}
                         date_time = data['Date/Time'] - timedelta(days=sub_day)
                         th_day = pd.Timestamp(date_time).dayofweek
-                        if th_day == 6:
-                            sub_day = sub_day + 2
+                        if th_day == 6: sub_day = sub_day + 2
+                        date_time = data['Date/Time'] - timedelta(days=sub_day)
+                        if date_time == qk2: sub_day = sub_day + 2
+                        if date_time == td: sub_day = sub_day + 3
+                        if date_time == ta5: sub_day = sub_day + 7
+                        if date_time == gthv: sub_day = sub_day + 3
+                        if date_time == qtld2: sub_day = sub_day + 4
+
                         date_time = data['Date/Time'] - timedelta(days=sub_day)
                         obj['asset_code'] = data['Ticker']
                         obj['datetime'] = date_time.strftime("%Y-%m-%d %H:%M:%S")
